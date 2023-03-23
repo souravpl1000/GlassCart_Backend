@@ -14,9 +14,6 @@ productRouter.get("/", (req, res) => {
   if (req.query.colors) {
     query.colors = { $regex: req.query.colors };
   }
-  if (req.query.price) {
-    query.price = req.query.price;
-  }
   if (req.query.mPrice) {
     query.mPrice = req.query.mPrice;
   }
@@ -49,7 +46,7 @@ productRouter.get("/", (req, res) => {
         res.send(prod);
       }
     })
-    .sort({ id: req.query.sort === "oldest" ? 1 : -1 })
+    .sort({ price: req.query.sort === "lowtohigh" ? 1 : -1 })
     .skip(parseInt(req.query.page) * 20)
     .limit(20);
 });
