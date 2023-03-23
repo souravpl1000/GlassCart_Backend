@@ -49,7 +49,7 @@ productRouter.get("/", (req, res) => {
         res.send(prod);
       }
     })
-    .sort({ id: req.query.sort === "oldest" ? 1 : -1 })
+    .sort({ _id: req.query.sort === "oldest" ? 1 : -1 })
     .skip(parseInt(req.query.page) * 20)
     .limit(20);
 });
