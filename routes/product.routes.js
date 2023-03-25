@@ -14,6 +14,9 @@ productRouter.get("/", (req, res) => {
   if (req.query.colors) {
     query.colors = { $regex: req.query.colors };
   }
+  if (req.query.price) {
+    query.price = req.query.price;
+  }
   if (req.query.mPrice) {
     query.mPrice = req.query.mPrice;
   }
@@ -38,6 +41,9 @@ productRouter.get("/", (req, res) => {
   if (req.query.search) {
     query.name = { $regex: req.query.search, $options: "i" };
   }
+  if (req.query.productRefLink) {
+    query.productRefLink = { $regex: req.query.productRefLink, $options: "i" };
+  }
   data
     .find(query, (error, prod) => {
       if (error) {
@@ -47,8 +53,8 @@ productRouter.get("/", (req, res) => {
       }
     })
     .sort({ price: req.query.sort === "lowtohigh" ? 1 : -1 })
-    .skip(parseInt(req.query.page) * 20)
-    .limit(20);
+    .skip(parseInt(req.query.page) * 12)
+    .limit(12);
 });
 
 productRouter.get("/:id", async (req, res) => {
